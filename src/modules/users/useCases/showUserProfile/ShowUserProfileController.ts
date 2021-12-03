@@ -5,15 +5,15 @@ import { ShowUserProfileUseCase } from "./ShowUserProfileUseCase";
 class ShowUserProfileController {
   constructor(private showUserProfileUseCase: ShowUserProfileUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const { user_id } = request.params;
+  handle(req: Request, res: Response): Response {
+    const { user_id } = req.params;
 
     try {
       const userProfileFound = this.showUserProfileUseCase.execute({ user_id });
 
-      return response.status(200).json(userProfileFound);
+      return res.status(200).json(userProfileFound);
     } catch (error) {
-      return response.status(404).json({ error: error.message });
+      return res.status(404).json({ error: error.message });
     }
   }
 }
